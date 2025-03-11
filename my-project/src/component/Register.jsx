@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../AuthProvider/AuthProvider';
 
 const Register = () => {
+
+    const {name}= useContext(AuthContext)
+    console.log(name)
 
     const handleRegister=e=>{
         e.preventDefault();
