@@ -2,6 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
+
+    const handleLogin=e=>{
+        e.preventDefault();
+        const email=e.target.email.value;
+        const password=e.target.password.value;
+
+        console.log(email, password)
+    }
+
+
     return (
         <div className="my-6">
             <div className="hero-content flex-col ">
@@ -10,7 +20,7 @@ const Login = () => {
                     
                 </div>
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-                    <div className="card-body">
+                    <form onSubmit={handleLogin} className="card-body">
                         <fieldset className="fieldset">
                             <label className="fieldset-label">Email</label>
                             <input type="email" name='email' className="input" placeholder="Email" />
@@ -23,7 +33,7 @@ const Login = () => {
 
                             <p>If you don't have an account? Please <Link className='text-green-500 underline' to={'/register'}>register</Link></p>
                         </fieldset>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
