@@ -26,6 +26,8 @@ const Header = () => {
             user && <>
             <li className='text-xl'>
             <NavLink to={'/orders'}>Orders</NavLink></li>
+            <li className='text-xl'>
+            <NavLink to={'/profile'}>Profile</NavLink></li>
             </>
         }
         
