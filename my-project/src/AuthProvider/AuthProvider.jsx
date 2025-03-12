@@ -37,7 +37,8 @@ const AuthProvider = ({ children }) => {
                 setLoading(false);
             }
             else{
-                console.log('user sign out', currentUser)
+                console.log('user sign out', currentUser);
+                setLoading(false)
             }
         });
 
