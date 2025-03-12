@@ -1,30 +1,41 @@
 import React, { useContext } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 
 const Login = () => {
-    const navigate=useNavigate()
+    const navigate = useNavigate()
 
-    const {signInUser}=useContext(AuthContext);
+    const { signInUser, signInWithGoogle } = useContext(AuthContext);
 
-    const handleLogin=e=>{
+    const handleLogin = e => {
         e.preventDefault();
-        const email=e.target.email.value;
-        const password=e.target.password.value;
-        e.target.reset();
-        navigate('/')
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+
 
         console.log(email, password)
 
-        signInUser(email,password)
-        .then(result=>{
-            console.log(result.user)
-        })
-        .catch(error=>{
-            console.log("Error",error.message)
-        })
+        signInUser(email, password)
+            .then(result => {
+                console.log(result.user)
+                e.target.reset();
+                navigate('/')
+            })
+            .catch(error => {
+                console.log("Error", error.message)
+            })
+    }
 
-
+    const handleGoogle = () => {
+        signInWithGoogle()
+            .then(result => {
+                console.log(result);
+                navigate('/');
+                
+            })
+            .catch(error => {
+                console.log('Error', error)
+            })
     }
 
 
@@ -33,7 +44,7 @@ const Login = () => {
             <div className="hero-content flex-col ">
                 <div className="text-center lg:text-left">
                     <h1 className="text-3xl font-bold">Login now!</h1>
-                    
+
                 </div>
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                     <form onSubmit={handleLogin} className="card-body">
@@ -49,6 +60,8 @@ const Login = () => {
 
                             <p>If you don't have an account? Please <Link className='text-green-500 underline' to={'/register'}>register</Link></p>
                         </fieldset>
+
+                        <button onClick={handleGoogle} className='border-2 border-green-300'>Login With Google</button>
                     </form>
                 </div>
             </div>
