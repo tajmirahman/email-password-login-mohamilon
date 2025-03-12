@@ -6,21 +6,26 @@ import auth from "../firebase.init";
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext(null);
 
+
 const AuthProvider = ({ children }) => {
 
-    const [user, setUser]=useState(null)
+    const [user, setUser]=useState(null);
+    const [loading, setLoading]=useState(true);
 
-    const name = "Nahid er vi shahid"
+   
 
     const createUser = (email, password) => {
+        setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
     const signInUser=(email,password)=>{
+        setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
 
     const signOutUser=()=>{
+        setLoading(true)
         signOut(auth)
     }
 
@@ -29,6 +34,7 @@ const AuthProvider = ({ children }) => {
             if(currentUser){
                 console.log('User log in', currentUser);
                 setUser(currentUser);
+                setLoading(false);
             }
             else{
                 console.log('user sign out', currentUser)
@@ -45,8 +51,9 @@ const AuthProvider = ({ children }) => {
 
 
     const authRef = {
-        name,
+  
         user,
+        loading,
         createUser,
         signInUser,
         signOutUser

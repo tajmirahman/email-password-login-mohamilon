@@ -22,6 +22,13 @@ const Header = () => {
         <li className='text-xl'><NavLink to={'/login'}>Login</NavLink></li>
         <li className='text-xl'><NavLink to={'/register'}>Register</NavLink></li>
         
+        {
+            user && <>
+            <li className='text-xl'>
+            <NavLink to={'/orders'}>Orders</NavLink></li>
+            </>
+        }
+        
     </>
 
     return (
@@ -45,7 +52,7 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">
+               
                     {
                         user ?
                         <>
@@ -55,7 +62,7 @@ const Header = () => {
                         : 
                         <Link to={'/login'}>Login</Link>
                     }
-                </a>
+            
             </div>
         </div>
     );
